@@ -99,12 +99,6 @@ class PostController extends Controller
             // Upload Image
             $path = $request->file('cover_img')->storeAs('public/cover_img', $fileNameToStore);
 
-	    // make thumbnails
-	    // $thumbStore = 'thumb.'.$filename.'_'.time().'.'.$extension;
-        //     $thumb = Image::make($request->file('cover_image')->getRealPath());
-        //     $thumb->resize(80, 80);
-        //     $thumb->save('storage/cover_img/'.$thumbStore);
-
         } else {
             $fileNameToStore = 'noimage.png';
         }
@@ -217,11 +211,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post,$id)
+    public function destroy($id)
     {
 
         $post = Post::find($id);
-        $this->authorize('delete', $post);
+        // $this->authorize('delete', $post);
         //Check if post exists before deleting
         if (!isset($post)){
             return redirect('/posts')->with('error', 'No Post Found');
